@@ -15,6 +15,7 @@ class UserController {
     }
   }
   async get(req: Request, res: Response) {
+    console.log("test");
     return "test";
   }
 }
