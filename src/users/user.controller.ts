@@ -15,7 +15,7 @@ class UserController {
     }
   }
   async get(req: Request, res: Response) {
-    return res.json({ text: "test" });
+    return "test";
   }
 }
 
