@@ -3,7 +3,7 @@ import { IsString, IsNotEmpty, IsOptional, IsDate } from "class-validator";
 export class CreateUserDTO {
   @IsString()
   @IsNotEmpty()
-  client_id!: string;
+  id!: string;
 
   @IsString()
   @IsNotEmpty()
@@ -17,4 +17,3 @@ export class CreateUserDTO {
   @IsDate()
   updated_at?: Date;
 }
-

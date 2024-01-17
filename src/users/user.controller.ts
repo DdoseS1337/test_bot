@@ -7,15 +7,11 @@ class UserController {
   async create(req: Request, res: Response) {
     try {
       console.log(req.body);
-      return res.json(req.body);
-      //   await this.userService.validateCreateUserDto(req.body);
+      return this.userService.validateCreateUserDto(req.body);
     } catch (error) {
       console.log(error);
       throw new Error();
     }
-  }
-  async get(req: Request, res: Response) {
-    return res.json({ text: "test" });
   }
 }
 

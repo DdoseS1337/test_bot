@@ -6,18 +6,22 @@ export class UserService {
   constructor(private readonly userRepository: UserRepository) {}
 
   private async create(createUserDTO: CreateUserDTO) {
-    const createUser = createUserDTO as Omit<UserDocument, "_id">;
+    const createUser = {
+      ...createUserDTO,
+      client_id: createUserDTO.id,
+    } as Omit<UserDocument, "_id">;
     return this.userRepository.create(createUser);
   }
 
-  async validateCreateUserDto(createUserDto: CreateUserDTO) {
+  async validateCreateUserDto(createUserDTO: CreateUserDTO) {
     try {
+      const lastEntry = new Date(Date.now());
       await this.userRepository.findOneAndUpdate(
-        { client_id: createUserDto.client_id },
-        { $set: { updated_at: createUserDto.updated_at } }
+        { client_id: createUserDTO.id },
+        { $set: { updated_at: lastEntry } }
       );
     } catch (err) {
-      return this.create(createUserDto);
+      return this.create(createUserDTO);
     }
   }
 }
