@@ -6,7 +6,7 @@ class UserController {
   constructor(private readonly userService: UserService) {}
   async create(req: Request, res: Response) {
     try {
-      console.log("get data");
+      console.log(req.body);
       return res.json(req.body);
       //   await this.userService.validateCreateUserDto(req.body);
     } catch (error) {
