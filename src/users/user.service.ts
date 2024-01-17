@@ -7,7 +7,7 @@ export class UserService {
 
   private async create(createUserDTO: CreateUserDTO) {
     const createUser = {
-      ...createUserDTO,
+      wallet_address: createUserDTO.address,
       client_id: createUserDTO.id,
     } as Omit<UserDocument, "_id">;
     return this.userRepository.create(createUser);

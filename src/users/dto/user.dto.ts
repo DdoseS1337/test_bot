@@ -7,7 +7,7 @@ export class CreateUserDTO {
 
   @IsString()
   @IsNotEmpty()
-  wallet_address!: string;
+  address!: string;
 
   @IsOptional()
   @IsDate()
