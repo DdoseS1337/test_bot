@@ -6,11 +6,16 @@ export class UserService {
   constructor(private readonly userRepository: UserRepository) {}
 
   private async create(createUserDTO: CreateUserDTO) {
-    const createUser = {
-      wallet_address: createUserDTO.address,
-      client_id: createUserDTO.id,
-    } as Omit<UserDocument, "_id">;
-    return this.userRepository.create(createUser);
+    try {
+      const createUser = {
+        wallet_address: createUserDTO.address,
+        client_id: createUserDTO.id,
+      } as Omit<UserDocument, "_id">;
+      return this.userRepository.create(createUser);
+    } catch (error) {
+      console.log(error);
+      throw new Error();
+    }
   }
 
   async validateCreateUserDto(createUserDTO: CreateUserDTO) {

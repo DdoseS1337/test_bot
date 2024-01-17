@@ -12,6 +12,7 @@ class Database {
       await mongoose.connect(this.uri, {});
     } catch (error) {
       console.log(error);
+      throw new Error();
     }
   }
 }

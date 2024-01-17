@@ -2,11 +2,11 @@ import { UserDocumentModel } from "./model/user.schema";
 import { UserRepository } from "./user.repository";
 import { UserService } from "./user.service";
 import { Request, Response } from "express";
+
 class UserController {
   constructor(private readonly userService: UserService) {}
   async create(req: Request, res: Response) {
     try {
-      console.log(req.body);
       return this.userService.validateCreateUserDto(req.body);
     } catch (error) {
       console.log(error);

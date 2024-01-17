@@ -5,9 +5,6 @@ import { IBotContext } from "./context/context.interface";
 import { Command } from "./commands/command.class";
 import { StartCommand } from "./commands/start.command";
 import Database from "./database/database.connect";
-import { UserService } from "./users/user.service";
-import { UserRepository } from "./users/user.repository";
-import { UserDocumentModel } from "./users/model/user.schema";
 import express, { Application } from "express";
 import Server from "./server";
 
@@ -17,18 +14,15 @@ class Bot {
   PORT: string = this.configService.get("PORT");
   bot: Telegraf<IBotContext>;
   commands: Command[] = [];
-  constructor(
-    private readonly configService: IConfigService,
-    private readonly userService: UserService
-  ) {
+  constructor(private readonly configService: IConfigService) {
     this.bot = new Telegraf<IBotContext>(this.configService.get("TOKEN"));
     this.bot.use(session());
   }
-  init() {
+  async init() {
     const db = new Database(this.configService.get("MONGODB_URI"));
     try {
-      db.connect();
-      console.log("database succesfully connected");
+      await db.connect();
+      console.log("database successfully connected");
     } catch (error) {
       console.log(error);
     }
@@ -39,13 +33,9 @@ class Bot {
     for (const command of this.commands) {
       command.handle();
     }
-
     this.bot.launch();
   }
 }
 
-const bot = new Bot(
-  new ConfigService(),
-  new UserService(new UserRepository(UserDocumentModel))
-);
+const bot = new Bot(new ConfigService());
 bot.init();

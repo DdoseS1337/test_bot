@@ -19,7 +19,7 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
       console.log("Document not found filterQuery", filterQuery);
       throw new Error("Document not found");
     }
-
+    
     return document as unknown as TDocument;
   }
 
