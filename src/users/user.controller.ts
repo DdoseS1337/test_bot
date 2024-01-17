@@ -14,7 +14,11 @@ class UserController {
       throw new Error();
     }
   }
+  async get(req: Request, res: Response) {
+    return res.json({ text: "test" });
+  }
 }
+
 const userController = new UserController(
   new UserService(new UserRepository(UserDocumentModel))
 );

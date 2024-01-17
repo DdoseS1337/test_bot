@@ -11,7 +11,6 @@ import { UserDocumentModel } from "./users/model/user.schema";
 import express, { Application } from "express";
 import Server from "./server";
 
-//For env File
 class Bot {
   app: Application = express();
   server: Server = new Server(this.app);
@@ -34,7 +33,7 @@ class Bot {
       console.log(error);
     }
     this.app.listen(this.PORT, () => {
-      console.log(`Server running at http://localhost:${this.PORT}`);
+      console.log(`Server running at port ${this.PORT}`);
     });
     this.commands = [new StartCommand(this.bot, this.configService)];
     for (const command of this.commands) {
