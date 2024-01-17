@@ -7,7 +7,7 @@ class UserController {
   async create(req: Request, res: Response) {
     try {
       console.log("get data");
-      return res.json();
+      return res.json(req.body);
       //   await this.userService.validateCreateUserDto(req.body);
     } catch (error) {
       console.log(error);
